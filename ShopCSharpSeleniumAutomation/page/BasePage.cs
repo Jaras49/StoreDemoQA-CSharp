@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using log4net;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support;
 using OpenQA.Selenium.Support.UI;
+using NUnit.Framework;
 
 namespace ShopCSharpSeleniumAutomation.page
 {
-    public abstract class BasePage<T> where T: BasePage<T>
+    public abstract class BasePage<T> where T : BasePage<T>
     {
         protected IWebDriver driver;
         protected WebDriverWait wait;
@@ -22,6 +18,41 @@ namespace ShopCSharpSeleniumAutomation.page
             this.wait = wait;
             this.actions = actions;
         }
+
+        public T AssertEquals<M>(M expected, M actual)
+        {
+            Assert.AreEqual(expected, actual);
+            return GetThis();
+        }
+
+        protected IWebElement WaitForElementToBeVisible(IWebElement element, string elementName)
+        {
+            GetLogger().Info($"Waiting for element - {elementName} - to become visible");
+            return wait.Until(ExpectedConditions.ElementToBeClickable(element));
+        }
+
+        protected IWebElement WaitForElementToBeInvisible(IWebElement element, string elementName)
+        {
+            GetLogger().Info($"Waiting for element - {elementName} to become invisible");
+            return wait.Until<IWebElement>((d) =>
+            {
+                if (!element.Displayed)
+                {
+                    return element;
+                }
+                return null;
+            });
+        }
+
+        protected T WaitForElementTextUpdate(IWebElement element, string textToBe, string elementName)
+        {
+            GetLogger().Info($"Waiting for element - {elementName} text to be {textToBe}");
+            wait.Until(ExpectedConditions.TextToBePresentInElement(element, textToBe));
+            return GetThis();
+        }
+
         protected abstract T GetThis();
+
+        protected abstract ILog GetLogger();
     }
 }
