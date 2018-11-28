@@ -13,9 +13,12 @@ namespace ShopCSharpSeleniumAutomation.page.cart
     //TODO implement me
     public class CheckoutPage : WebElementManipulator<CheckoutPage>
     {
-        public CheckoutPage(IWebDriver driver, WebDriverWait wait, Actions actions)
+        public MenuPage Menu { get; }
+
+        public CheckoutPage(IWebDriver driver, WebDriverWait wait, Actions actions, MenuPage menu)
             : base(driver, wait, actions)
         {
+            Menu = menu;
         }
 
         protected override ILog GetLogger()

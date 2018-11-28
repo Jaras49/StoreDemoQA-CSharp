@@ -13,9 +13,12 @@ namespace ShopCSharpSeleniumAutomation.page.cart
     //TODO implement me
     public class TransactionSummaryPage : WebElementManipulator<TransactionSummaryPage>
     {
-        public TransactionSummaryPage(IWebDriver driver, WebDriverWait wait, Actions actions)
+        public MenuPage Menu { get; }
+
+        public TransactionSummaryPage(IWebDriver driver, WebDriverWait wait, Actions actions, MenuPage menu)
             : base(driver, wait, actions)
         {
+            Menu = menu;
         }
 
         protected override ILog GetLogger()

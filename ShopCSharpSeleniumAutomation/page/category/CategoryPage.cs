@@ -13,9 +13,12 @@ namespace ShopCSharpSeleniumAutomation.page.category
     //TODO implement me
     public class CategoryPage : WebElementManipulator<CategoryPage>
     {
-        public CategoryPage(IWebDriver driver, WebDriverWait wait, Actions actions)
+        public MenuPage Menu { get; }
+
+        public CategoryPage(IWebDriver driver, WebDriverWait wait, Actions actions, MenuPage menu)
             : base(driver, wait, actions)
         {
+            Menu = menu;
         }
 
         protected override ILog GetLogger()
