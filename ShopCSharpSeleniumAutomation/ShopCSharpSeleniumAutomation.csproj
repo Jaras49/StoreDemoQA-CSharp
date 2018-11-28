@@ -78,6 +78,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="factory\" />
+    <Folder Include="page\cart\" />
+    <Folder Include="page\category\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
