@@ -3,13 +3,12 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
+using ShopCSharpSeleniumAutomation.factory;
+using ShopCSharpSeleniumAutomation.page.cart;
+using ShopCSharpSeleniumAutomation.page.category;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace ShopCSharpSeleniumAutomation.page
 {
@@ -33,7 +32,7 @@ namespace ShopCSharpSeleniumAutomation.page
         private IWebElement cart;
 
         [FindsBy(How = How.CssSelector, Using = "#header_cart .count")]
-        private IWebElement numberOfCartItems;
+        public IWebElement NumberOfCartItems { get; }
 
         public MenuPage(IWebDriver driver, WebDriverWait wait, Actions actions)
             : base(driver, wait, actions)
@@ -41,26 +40,25 @@ namespace ShopCSharpSeleniumAutomation.page
             PageFactory.InitElements(driver, this);
         }
 
-        public void GoToCartPage()
+        public CartPage GoToCartPage()
         {
             ClickElement(cart, nameof(cart));
-        }
-        //TODO implement menu methods
-        public void ExampleMethod()
-        {
-            HoverOverElement(productCategoryButton, nameof(productCategoryButton));
-            //WaitForElementToBeInvisible(accessoriesCategoryButton, nameof(accessoriesCategoryButton));
-            accessoriesCategoryButton.Click();
+            return PageObjectFactory.CreateCartPage(driver);
         }
 
-        protected override MenuPage GetThis()
+        public CategoryPage GoToRandomCategory()
         {
-            return this;
+            var size = productCategories.Count;
+            var random = new Random().Next(0, size);
+            HoverOverElement(productCategoryButton, nameof(productCategoryButton))
+                .ClickElement(productCategories.ElementAt(random), nameof(productCategories));
+            return PageObjectFactory.CreateCategoryPage(driver);
         }
 
-        protected override ILog GetLogger()
-        {
-            return log;
-        }
+        public int GetNumberOfCartItems() => Convert.ToInt32(NumberOfCartItems.Text);
+
+        protected override MenuPage GetThis() => this;
+
+        protected override ILog GetLogger() => log;
     }
 }
