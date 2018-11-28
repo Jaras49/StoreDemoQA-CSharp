@@ -45,7 +45,7 @@ namespace ShopCSharpSeleniumAutomation.page
         {
             ClickElement(cart, nameof(cart));
         }
-        //TODO
+        //TODO implement menu methods
         public void ExampleMethod()
         {
             HoverOverElement(productCategoryButton, nameof(productCategoryButton));
