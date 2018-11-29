@@ -8,14 +8,14 @@ namespace ShopCSharpSeleniumAutomation.model
 {
     public sealed class User
     {
-        private string Email { get; }
-        private string Firstname { get; }
-        private string Lastname { get; }
-        private string Address { get; }
-        private string City { get; }
-        private string State { get; }
-        private string Country { get; }
-        private string Phone { get; }
+        public string Email { get; }
+        public string Firstname { get; }
+        public string Lastname { get; }
+        public string Address { get; }
+        public string City { get; }
+        public string State { get; }
+        public string Country { get; }
+        public string Phone { get; }
 
         public User(string email, string firstname, string lastname, string address, string city, string state, string country, string phone)
         {
