@@ -26,7 +26,7 @@ namespace ShopCSharpSeleniumAutomation.factory
         public static CartPage CreateCartPage(IWebDriver driver) => new CartPage
                 (driver, new WebDriverWait(driver, TimeSpan.FromSeconds(defaultWait)), new Actions(driver), CreateMenuPage(driver));
 
-        public static CheckoutPage CreatecheckoutPage(IWebDriver driver) => new CheckoutPage
+        public static CheckoutPage CreateCheckoutPage(IWebDriver driver) => new CheckoutPage
                 (driver, new WebDriverWait(driver, TimeSpan.FromSeconds(defaultWait)), new Actions(driver), CreateMenuPage(driver));
 
         public static MenuPage CreateMenuPage(IWebDriver driver) => new MenuPage
