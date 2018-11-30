@@ -34,6 +34,8 @@ namespace ShopCSharpSeleniumAutomation.model
 
         public decimal GetOrderPrice() => Products.Select(n => n.TotalPrice).Sum();
 
+        public decimal GetOrderPriceWithShipping() => Decimal.Add(GetOrderPrice(), ShippingPrice);
+
         private IEnumerable<Product> IsInProducts(string name) => Products
                 .Select(n => n)
                 .Where(n => n.ProductName.Equals(name));
