@@ -107,7 +107,7 @@ namespace ShopCSharpSeleniumAutomation.page.cart
             return Regex.Replace(text, removeDashesRegex, "");
         }
 
-        protected override ILog GetLogger() => log;
-        protected override CartPage GetThis() => this;
+        protected override ILog Logger => log;
+        protected override CartPage This => this;
     }
 }

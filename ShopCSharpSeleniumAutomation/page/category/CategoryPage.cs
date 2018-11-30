@@ -46,7 +46,7 @@ namespace ShopCSharpSeleniumAutomation.page.category
             return productPage;
         }
 
-        protected override ILog GetLogger() => log;
-        protected override CategoryPage GetThis() => this;
+        protected override ILog Logger => log;
+        protected override CategoryPage This => this;
     }
 }

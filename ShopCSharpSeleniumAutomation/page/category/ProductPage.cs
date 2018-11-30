@@ -64,7 +64,7 @@ namespace ShopCSharpSeleniumAutomation.page.category
             return expectedCartProducts.ToString();
         }
 
-        protected override ILog GetLogger() => log;
-        protected override ProductPage GetThis() => this;
+        protected override ILog Logger => log;
+        protected override ProductPage This => this;
     }
 }

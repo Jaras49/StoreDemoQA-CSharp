@@ -12,6 +12,9 @@ namespace ShopCSharpSeleniumAutomation.page
         protected WebDriverWait wait;
         protected Actions actions;
 
+        protected abstract T This { get; }
+        protected abstract ILog Logger { get; }
+
         protected BasePage(IWebDriver driver, WebDriverWait wait, Actions actions)
         {
             this.driver = driver;
@@ -22,18 +25,18 @@ namespace ShopCSharpSeleniumAutomation.page
         public T AssertEquals<M>(M expected, M actual)
         {
             Assert.AreEqual(expected, actual);
-            return GetThis();
+            return This;
         }
 
         protected IWebElement WaitForElementToBeVisible(IWebElement element, string elementName)
         {
-            GetLogger().Info($"Waiting for element - {elementName} - to become visible");
+            Logger.Info($"Waiting for element - {elementName} - to become visible");
             return wait.Until(ExpectedConditions.ElementToBeClickable(element));
         }
 
         protected IWebElement WaitForElementToBeInvisible(IWebElement element, string elementName)
         {
-            GetLogger().Info($"Waiting for element - {elementName} to become invisible");
+            Logger.Info($"Waiting for element - {elementName} to become invisible");
             return wait.Until<IWebElement>((d) =>
             {
                 if (!element.Displayed)
@@ -46,13 +49,9 @@ namespace ShopCSharpSeleniumAutomation.page
 
         protected T WaitForElementTextUpdate(IWebElement element, string textToBe, string elementName)
         {
-            GetLogger().Info($"Waiting for element - {elementName} text to be {textToBe}");
+            Logger.Info($"Waiting for element - {elementName} text to be {textToBe}");
             wait.Until(ExpectedConditions.TextToBePresentInElement(element, textToBe));
-            return GetThis();
+            return This;
         }
-
-        protected abstract T GetThis();
-
-        protected abstract ILog GetLogger();
     }
 }

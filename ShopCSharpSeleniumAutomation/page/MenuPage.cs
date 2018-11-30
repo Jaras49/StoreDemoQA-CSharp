@@ -57,8 +57,8 @@ namespace ShopCSharpSeleniumAutomation.page
 
         public int GetNumberOfCartItems() => Convert.ToInt32(NumberOfCartItems.Text);
 
-        protected override MenuPage GetThis() => this;
+        protected override MenuPage This => this;
 
-        protected override ILog GetLogger() => log;
+        protected override ILog Logger => log;
     }
 }
