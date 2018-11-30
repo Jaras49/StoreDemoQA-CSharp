@@ -13,15 +13,15 @@ namespace ShopCSharpSeleniumAutomation.model
         public int Quantity { get; private set; }
         public decimal TotalPrice { get; private set; }
 
-        public Product(string productName, decimal price, int quantity, decimal totalPrice)
+        public Product(string productName, decimal price)
         {
             ProductName = productName;
             Price = price;
-            Quantity = quantity;
-            TotalPrice = totalPrice;
+            Quantity++;
+            TotalPrice = price;
         }
 
-        void AddProduct()
+        public void AddProduct()
         {
             Quantity++;
             TotalPrice = Decimal.Add(TotalPrice, Price);
