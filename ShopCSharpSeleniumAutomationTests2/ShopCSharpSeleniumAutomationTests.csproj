@@ -39,6 +39,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
@@ -48,6 +51,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
     <Reference Include="WebDriver, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Selenium.WebDriver.3.141.0\lib\net45\WebDriver.dll</HintPath>
     </Reference>
@@ -65,11 +69,16 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
+    <Compile Include="factory\DriverFactory.cs" />
+    <Compile Include="factory\DriverNotFoundException.cs" />
     <Compile Include="page\MenuPageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <EmbeddedResource Include="test.properties">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ShopCSharpSeleniumAutomation\ShopCSharpSeleniumAutomation.csproj">
@@ -104,8 +113,12 @@
     <Error Condition="!Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.11.0\build\NUnit.props'))" />
     <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.11.2\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.11.2\build\net35\NUnit3TestAdapter.props'))" />
     <Error Condition="!Exists('..\packages\Selenium.WebDriver.ChromeDriver.2.44.0\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.ChromeDriver.2.44.0\build\Selenium.WebDriver.ChromeDriver.targets'))" />
+    <Error Condition="!Exists('..\packages\Selenium.WebDriver.GeckoDriver.0.23.0.3\build\Selenium.WebDriver.GeckoDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.GeckoDriver.0.23.0.3\build\Selenium.WebDriver.GeckoDriver.targets'))" />
+    <Error Condition="!Exists('..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.17134\build\Selenium.WebDriver.MicrosoftWebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.17134\build\Selenium.WebDriver.MicrosoftWebDriver.targets'))" />
   </Target>
   <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.2.44.0\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.2.44.0\build\Selenium.WebDriver.ChromeDriver.targets')" />
+  <Import Project="..\packages\Selenium.WebDriver.GeckoDriver.0.23.0.3\build\Selenium.WebDriver.GeckoDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.GeckoDriver.0.23.0.3\build\Selenium.WebDriver.GeckoDriver.targets')" />
+  <Import Project="..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.17134\build\Selenium.WebDriver.MicrosoftWebDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.17134\build\Selenium.WebDriver.MicrosoftWebDriver.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
