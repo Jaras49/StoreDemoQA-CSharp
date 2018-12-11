@@ -10,7 +10,7 @@ namespace ShopCSharpSeleniumAutomationTests.factory
     {
         public static IWebDriver GetDriver(string browserName)
         {
-            DriverType driverType = (DriverType)Enum.Parse(typeof(DriverType), browserName);
+            DriverType driverType = (DriverType)Enum.Parse(typeof(DriverType), browserName, true);
             switch (driverType)
             {
                 case DriverType.chrome:

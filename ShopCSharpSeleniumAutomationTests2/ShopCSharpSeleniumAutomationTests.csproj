@@ -71,7 +71,7 @@
     <Compile Include="BaseTest.cs" />
     <Compile Include="factory\DriverFactory.cs" />
     <Compile Include="factory\DriverNotFoundException.cs" />
-    <Compile Include="page\MenuPageTests.cs" />
+    <Compile Include="page\CheckoutTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

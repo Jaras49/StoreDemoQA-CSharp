@@ -40,11 +40,17 @@ namespace ShopCSharpSeleniumAutomation.model
                 .Select(n => n)
                 .Where(n => n.ProductName.Equals(name));
 
+        public override string ToString() => "Order{" +
+                "products=" + String.Join(" ; ", Products) +
+                ", shippingPrice=" + ShippingPrice +
+                '}';
+
+
         public override bool Equals(object obj)
         {
             var order = obj as Order;
             return order != null &&
-                   EqualityComparer<IList<Product>>.Default.Equals(Products, order.Products) &&
+                   Products.SequenceEqual(order.Products) &&
                    ShippingPrice == order.ShippingPrice;
         }
 
@@ -55,10 +61,5 @@ namespace ShopCSharpSeleniumAutomation.model
             hashCode = hashCode * -1521134295 + ShippingPrice.GetHashCode();
             return hashCode;
         }
-
-        public override string ToString() => "Order{" +
-                "products=" + Products +
-                ", shippingPrice=" + ShippingPrice +
-                '}';
     }
 }

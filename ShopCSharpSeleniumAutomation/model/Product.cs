@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ShopCSharpSeleniumAutomation.model
 {
@@ -27,6 +24,13 @@ namespace ShopCSharpSeleniumAutomation.model
             TotalPrice = Decimal.Add(TotalPrice, Price);
         }
 
+        public override string ToString() => "Product{" +
+               "productName='" + ProductName + '\'' +
+               ", price=" + Price +
+               ", quantity=" + Quantity +
+               ", totalPrice=" + TotalPrice +
+               '}';
+
         public override bool Equals(object obj)
         {
             var product = obj as Product;
@@ -46,12 +50,5 @@ namespace ShopCSharpSeleniumAutomation.model
             hashCode = hashCode * -1521134295 + TotalPrice.GetHashCode();
             return hashCode;
         }
-
-        public override string ToString() => "Product{" +
-               "productName='" + ProductName + '\'' +
-               ", price=" + Price +
-               ", quantity=" + Quantity +
-               ", totalPrice=" + TotalPrice +
-               '}';
     }
 }

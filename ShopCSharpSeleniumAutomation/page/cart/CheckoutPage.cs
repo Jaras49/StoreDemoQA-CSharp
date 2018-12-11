@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.Threading;
 using log4net;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
@@ -55,13 +56,13 @@ namespace ShopCSharpSeleniumAutomation.page.cart
         [FindsBy(How = How.CssSelector, Using = ".table-4")]
         private IWebElement priceSummaryTable;
 
-        [FindsBy(How = How.CssSelector, Using = "//*[contains(text(), 'Total Shipping')]/following-sibling::*")]
+        [FindsBy(How = How.XPath, Using = "//*[contains(text(), 'Total Shipping')]/following-sibling::*")]
         private IWebElement totalShippingCost;
 
-        [FindsBy(How = How.CssSelector, Using = "//*[contains(text(), 'Item Cost')]/following-sibling::*")]
+        [FindsBy(How = How.XPath, Using = "//*[contains(text(), 'Item Cost')]/following-sibling::*")]
         private IWebElement itemCost;
 
-        [FindsBy(How = How.CssSelector, Using = "//*[contains(text(), 'Total Price')]/following-sibling::*")]
+        [FindsBy(How = How.XPath, Using = "//*[contains(text(), 'Total Price')]/following-sibling::*")]
         private IWebElement totalPrice;
 
         [FindsBy(How = How.CssSelector, Using = "input[value='Purchase']")]
@@ -85,6 +86,8 @@ namespace ShopCSharpSeleniumAutomation.page.cart
 
         public CheckoutPage FillFormWithUserDetails(User user)
         {
+            //TODO remove thread sleep
+            Thread.Sleep(10000);
             return SelectDropdownByVisibleText(shippingCountrySelect, nameof(shippingCountrySelect), user.Country)
                 .ClickElementAndWaitToBeVisible(calculateShippingButton, nameof(calculateShippingButton), priceSummaryTable, nameof(priceSummaryTable))
                 .SendKeys(emailInput, nameof(emailInput), user.Email)
@@ -100,7 +103,7 @@ namespace ShopCSharpSeleniumAutomation.page.cart
 
         public decimal GetShippingCost() => Convert.ToDecimal(Regex.Replace(totalShippingCost.Text, "[$,]", ""));
 
-        private decimal GetItemCost() => Convert.ToDecimal(itemCost);
+        private decimal GetItemCost() => Convert.ToDecimal(Regex.Replace(itemCost.Text, "[$,]", ""));
 
         private decimal GetTotalPrice() => Convert.ToDecimal(Regex.Replace(totalPrice.Text, "[$,]", ""));
 
