@@ -6,6 +6,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
+using ShopCSharpSeleniumAutomation.annotations;
 using ShopCSharpSeleniumAutomation.model;
 
 namespace ShopCSharpSeleniumAutomation.page.cart
@@ -25,6 +26,7 @@ namespace ShopCSharpSeleniumAutomation.page.cart
         [FindsBy(How = How.CssSelector, Using = ".wpsc-purchase-log-transaction-results > tbody > tr")]
         private IList<IWebElement> productsTableRows;
 
+        [WaitUntilVisible]
         [FindsBy(How = How.XPath, Using = "//p[contains(text(), 'Total Shipping')]")]
         private IWebElement totalShippingPrice;
 
@@ -33,6 +35,7 @@ namespace ShopCSharpSeleniumAutomation.page.cart
         {
             Menu = menu;
             PageFactory.InitElements(driver, this);
+            WaitUntilPageLoads();
         }
 
         public TransactionSummaryPage AssertTransactionSummaryPage(Order expectedOrder)

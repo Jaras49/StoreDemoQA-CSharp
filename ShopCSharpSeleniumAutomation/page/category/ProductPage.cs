@@ -5,6 +5,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
+using ShopCSharpSeleniumAutomation.annotations;
 
 namespace ShopCSharpSeleniumAutomation.page.category
 {
@@ -15,12 +16,15 @@ namespace ShopCSharpSeleniumAutomation.page.category
 
         public MenuPage Menu { get; }
 
+        [WaitUntilVisible]
         [FindsBy(How = How.CssSelector, Using = ".prodtitle")]
         private IWebElement productTitle;
 
+        [WaitUntilVisible]
         [FindsBy(How = How.CssSelector, Using = ".currentprice")]
         private IWebElement productPrice;
 
+        [WaitUntilVisible]
         [FindsBy(How = How.CssSelector, Using = "input[type='submit']")]
         private IWebElement addToCartButton;
 
@@ -32,6 +36,7 @@ namespace ShopCSharpSeleniumAutomation.page.category
         {
             Menu = menu;
             PageFactory.InitElements(driver, this);
+            WaitUntilPageLoads();
         }
 
         public ProductPage AddProductXtimes(int timesToAddProduct)

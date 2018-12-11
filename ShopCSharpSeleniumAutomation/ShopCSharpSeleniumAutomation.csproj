@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="annotations\WaitUntilVisible.cs" />
     <Compile Include="factory\PageObjectFactory.cs" />
     <Compile Include="factory\UserFactory.cs" />
     <Compile Include="model\Order.cs" />

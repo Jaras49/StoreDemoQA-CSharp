@@ -6,6 +6,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
+using ShopCSharpSeleniumAutomation.annotations;
 using ShopCSharpSeleniumAutomation.factory;
 using ShopCSharpSeleniumAutomation.model;
 
@@ -23,12 +24,14 @@ namespace ShopCSharpSeleniumAutomation.page.cart
 
         public MenuPage Menu { get; }
 
+        [WaitUntilVisible]
         [FindsBy(How = How.CssSelector, Using = ".yourtotal .pricedisplay")]
         private IWebElement totalCartPrice;
 
         [FindsBy(How = How.CssSelector, Using = ".checkout_cart tr.product_row")]
         private IList<IWebElement> products;
 
+        [WaitUntilVisible]
         [FindsBy(How = How.CssSelector, Using = ".step2")]
         private IWebElement continueButton;
 
@@ -37,6 +40,7 @@ namespace ShopCSharpSeleniumAutomation.page.cart
         {
             Menu = menu;
             PageFactory.InitElements(driver, this);
+            WaitUntilPageLoads();
         }
 
         public CheckoutPage ClickContinueButton()

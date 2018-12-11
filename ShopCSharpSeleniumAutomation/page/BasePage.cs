@@ -3,6 +3,10 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Reflection;
+using System;
+using ShopCSharpSeleniumAutomation.annotations;
 
 namespace ShopCSharpSeleniumAutomation.page
 {
@@ -52,6 +56,36 @@ namespace ShopCSharpSeleniumAutomation.page
             Logger.Info($"Waiting for element - {elementName} text to be {textToBe}");
             wait.Until(ExpectedConditions.TextToBePresentInElement(element, textToBe));
             return This;
+        }
+
+        protected void WaitUntilPageLoads()
+        {
+            var elements = GetFieldsAnnotatedWithWaitForVisible();
+            wait.Until((d) =>
+            {
+                foreach(IWebElement element in elements)
+                {
+                    if(!element.Displayed)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            });
+        }
+
+        private IList<IWebElement> GetFieldsAnnotatedWithWaitForVisible()
+        {
+            IList<IWebElement> result = new List<IWebElement>();
+            var fields = This.GetType().GetRuntimeFields();
+            foreach(FieldInfo field in fields)
+            {
+                if (field.FieldType == typeof(IWebElement) && Attribute.IsDefined(field, typeof(WaitUntilVisible)))
+                {
+                    result.Add((IWebElement) field.GetValue(this));
+                }
+            }
+            return result;
         }
     }
 }

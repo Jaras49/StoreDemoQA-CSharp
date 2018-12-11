@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using System.Threading;
 using log4net;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
+using ShopCSharpSeleniumAutomation.annotations;
 using ShopCSharpSeleniumAutomation.factory;
 using ShopCSharpSeleniumAutomation.model;
 
@@ -17,21 +17,27 @@ namespace ShopCSharpSeleniumAutomation.page.cart
 
         public MenuPage Menu { get; }
 
+        [WaitUntilVisible]
         [FindsBy(How = How.CssSelector, Using = "#wpsc_checkout_form_9")]
         private IWebElement emailInput;
 
+        [WaitUntilVisible]
         [FindsBy(How = How.CssSelector, Using = "#wpsc_checkout_form_2")]
         private IWebElement firstnameInput;
 
+        [WaitUntilVisible]
         [FindsBy(How = How.CssSelector, Using = "#wpsc_checkout_form_3")]
         private IWebElement lastnameInput;
 
+        [WaitUntilVisible]
         [FindsBy(How = How.CssSelector, Using = "#wpsc_checkout_form_4")]
         private IWebElement addressInput;
 
+        [WaitUntilVisible]
         [FindsBy(How = How.CssSelector, Using = "#wpsc_checkout_form_5")]
         private IWebElement cityInput;
 
+        [WaitUntilVisible]
         [FindsBy(How = How.CssSelector, Using = "#wpsc_checkout_form_6")]
         private IWebElement stateInput;
 
@@ -41,12 +47,15 @@ namespace ShopCSharpSeleniumAutomation.page.cart
         [FindsBy(How = How.CssSelector, Using = "#wpsc_checkout_form_7")]
         private IWebElement countrySelect;
 
+        [WaitUntilVisible]
         [FindsBy(How = How.CssSelector, Using = "#wpsc_checkout_form_18")]
         private IWebElement phoneInput;
 
+        [WaitUntilVisible]
         [FindsBy(How = How.CssSelector, Using = "#change_country input[type='submit']")]
         private IWebElement calculateShippingButton;
 
+        [WaitUntilVisible]
         [FindsBy(How = How.CssSelector, Using = "#shippingSameBilling")]
         private IWebElement sameAsBillingAddressCheckBox;
 
@@ -65,6 +74,7 @@ namespace ShopCSharpSeleniumAutomation.page.cart
         [FindsBy(How = How.XPath, Using = "//*[contains(text(), 'Total Price')]/following-sibling::*")]
         private IWebElement totalPrice;
 
+        [WaitUntilVisible]
         [FindsBy(How = How.CssSelector, Using = "input[value='Purchase']")]
         private IWebElement purchaseButton;
 
@@ -73,6 +83,7 @@ namespace ShopCSharpSeleniumAutomation.page.cart
         {
             Menu = menu;
             PageFactory.InitElements(driver, this);
+            WaitUntilPageLoads();
         }
 
         public TransactionSummaryPage ClickPurchaseButton()
@@ -86,8 +97,6 @@ namespace ShopCSharpSeleniumAutomation.page.cart
 
         public CheckoutPage FillFormWithUserDetails(User user)
         {
-            //TODO remove thread sleep
-            Thread.Sleep(10000);
             return SelectDropdownByVisibleText(shippingCountrySelect, nameof(shippingCountrySelect), user.Country)
                 .ClickElementAndWaitToBeVisible(calculateShippingButton, nameof(calculateShippingButton), priceSummaryTable, nameof(priceSummaryTable))
                 .SendKeys(emailInput, nameof(emailInput), user.Email)
