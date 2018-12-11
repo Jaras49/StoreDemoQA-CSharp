@@ -32,7 +32,7 @@ namespace ShopCSharpSeleniumAutomation.page
         private IWebElement cart;
 
         [FindsBy(How = How.CssSelector, Using = "#header_cart .count")]
-        public IWebElement NumberOfCartItems { get; }
+        private IWebElement numberOfCartItems;
 
         public MenuPage(IWebDriver driver, WebDriverWait wait, Actions actions)
             : base(driver, wait, actions)
@@ -55,7 +55,9 @@ namespace ShopCSharpSeleniumAutomation.page
             return PageObjectFactory.CreateCategoryPage(driver);
         }
 
-        public int GetNumberOfCartItems() => Convert.ToInt32(NumberOfCartItems.Text);
+        public int GetNumberOfCartItems() => Convert.ToInt32(numberOfCartItems.Text);
+
+        public IWebElement GetNumberOfCartItemsElement() => numberOfCartItems;
 
         protected override MenuPage This => this;
 

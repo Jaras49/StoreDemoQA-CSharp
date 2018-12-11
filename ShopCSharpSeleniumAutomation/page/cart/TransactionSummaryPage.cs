@@ -25,7 +25,7 @@ namespace ShopCSharpSeleniumAutomation.page.cart
         [FindsBy(How = How.CssSelector, Using = ".wpsc-purchase-log-transaction-results > tbody > tr")]
         private IList<IWebElement> productsTableRows;
 
-        [FindsBy(How = How.CssSelector, Using = "//p[contains(text(), 'Total Shipping')]")]
+        [FindsBy(How = How.XPath, Using = "//p[contains(text(), 'Total Shipping')]")]
         private IWebElement totalShippingPrice;
 
         public TransactionSummaryPage(IWebDriver driver, WebDriverWait wait, Actions actions, MenuPage menu)

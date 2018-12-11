@@ -54,7 +54,7 @@ namespace ShopCSharpSeleniumAutomation.page.category
         private void AddProduct()
         {
             ClickElementAndWaitToBeVisible(addToCartButton, nameof(addToCartButton), productAddedAlert, nameof(productAddedAlert))
-                .WaitForElementTextUpdate(Menu.NumberOfCartItems, ExpectedCartText(), nameof(Menu.NumberOfCartItems));
+                .WaitForElementTextUpdate(Menu.GetNumberOfCartItemsElement(), ExpectedCartText(), nameof(Menu.GetNumberOfCartItemsElement));
         }
 
         private string ExpectedCartText()
