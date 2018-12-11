@@ -8,16 +8,20 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
+using ShopCSharpSeleniumAutomationTests2;
+using System.Threading;
+using System.Diagnostics;
 
 namespace ShopCSharpSeleniumAutomation.page.Tests
 {
-    [TestFixture()]
-    public class MenuPageTests
+    public class MenuPageTests: BaseTest
     {
-        [Test()]
+        [Test]
         public void MenuPageTest()
         {
-            Assert.Fail();
+            menu.GoToCartPage();
+            Thread.Sleep(15);
+            Assert.Pass();
         }
     }
 }
