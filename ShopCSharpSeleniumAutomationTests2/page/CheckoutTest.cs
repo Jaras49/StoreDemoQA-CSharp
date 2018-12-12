@@ -54,19 +54,5 @@ namespace ShopCSharpSeleniumAutomation.page.Tests
                 expectedOrder.AddProduct(new Product(productName, price));
             }
         }
-        [Test]
-        public void sadasdTest()
-        {
-            menu.GoToRandomCategory()
-                .Menu.GoToCartPage()
-                .Menu.GoToRandomCategory()
-                .Menu.GoToRandomCategory()
-                .GoToRandomProductPageAndAssertItSwitchedCorrectly()
-                .AddProductXtimes(3)
-                .Menu.GoToRandomCategory()
-                .GoToRandomProductPageAndAssertItSwitchedCorrectly()
-                .AddProductXtimes(5)
-                .Menu.GoToCartPage();
-        }
     }
 }
