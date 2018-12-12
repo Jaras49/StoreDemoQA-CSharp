@@ -11,7 +11,6 @@ using ShopCSharpSeleniumAutomationTests.factory;
 
 namespace ShopCSharpSeleniumAutomationTests2
 {
-    //TODO remove ImplicitWait, ADD custom annotation waitFor to PageObjects, add takeScreenshot function
     [TestFixture]
     public class BaseTest
     {
@@ -38,7 +37,6 @@ namespace ShopCSharpSeleniumAutomationTests2
 
             driver = DriverFactory.GetDriver(browserName);
             driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
             driver.Url = storeUrl;
 
             menu = PageObjectFactory.CreateMenuPage(driver);
@@ -47,7 +45,14 @@ namespace ShopCSharpSeleniumAutomationTests2
         [TearDown]
         public void TearDown()
         {
+            TakeScreenshot();
             driver.Quit();
+        }
+
+        private void TakeScreenshot()
+        {
+            var screenshotsDirPath = properties.SelectSingleNode("//dir/screenshots").InnerXml;
+            ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile($"{screenshotsDirPath}{DateTime.Now.ToString("yyyyMMddHHmmssffff")}.jpeg");
         }
     }
 }

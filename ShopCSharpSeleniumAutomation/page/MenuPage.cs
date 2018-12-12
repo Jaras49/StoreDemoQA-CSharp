@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
+using ShopCSharpSeleniumAutomation.annotations;
 using ShopCSharpSeleniumAutomation.factory;
 using ShopCSharpSeleniumAutomation.page.cart;
 using ShopCSharpSeleniumAutomation.page.category;
@@ -19,6 +20,7 @@ namespace ShopCSharpSeleniumAutomation.page
         [FindsBy(How = How.CssSelector, Using = "#menu-item-33 .menu-item")]
         private IList<IWebElement> productCategories;
 
+        [WaitUntilVisible]
         [FindsBy(How = How.CssSelector, Using = "#menu-item-33")]
         private IWebElement productCategoryButton;
 
@@ -28,9 +30,11 @@ namespace ShopCSharpSeleniumAutomation.page
         [FindsBy(How = How.CssSelector, Using = "#menu-item-35")]
         private IWebElement iMacsCategoryButton;
 
+        [WaitUntilVisible]
         [FindsBy(How = How.CssSelector, Using = "#header_cart")]
         private IWebElement cart;
 
+        [WaitUntilVisible]
         [FindsBy(How = How.CssSelector, Using = "#header_cart .count")]
         private IWebElement numberOfCartItems;
 
@@ -38,6 +42,7 @@ namespace ShopCSharpSeleniumAutomation.page
             : base(driver, wait, actions)
         {
             PageFactory.InitElements(driver, this);
+            WaitUntilPageLoads();
         }
 
         public CartPage GoToCartPage()
